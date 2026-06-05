@@ -15,6 +15,7 @@ public:
 	// Constructors
 	vec2(float x = 0, float y = 0);
 
+
 	// Calculates the magnitude
 	float magnitude() const;
 
@@ -24,6 +25,7 @@ public:
 	// Calculates the tangent vector (unit vector perpendicular to origional vector)
 	vec2 tangentVector() const;
 
+
 	// Addition operator
 	vec2 operator+(const vec2& other) const;
 
@@ -31,9 +33,10 @@ public:
 	vec2 operator-(const vec2& other) const;
 
 
-	// Linear multiplication operator
+	// Linear multiplication
 	vec2 multiply(float scalar) const;
 
+	// Linear multiplication operator
 	vec2 operator*(float scalar) const;
 
 	//vec2d operator*(double scalar) const
@@ -41,12 +44,14 @@ public:
 	// Linear division operator
 	vec2 operator/(double scalar) const;
 
-	vec2 operator/(vec2 vec) const;
+	// Linear division operator
+	// vec2 operator/(vec2 vec) const;
+
 
 	// Type casting
 	operator const float* () const;
 
-	// Method to return a vec2d with the same values
+	// Return a vec2d with the same values
 	vec2d convertToDouble() const;
 
 	// TODO: Why isnt this working?
@@ -76,6 +81,7 @@ public:
 	// Calculates the tangent vector (unit vector perpendicular to origional vector)
 	vec2d tangentVector() const;
 
+
 	// Addition operator
 	vec2d operator+(const vec2d& other) const;
 
@@ -86,13 +92,16 @@ public:
 
 	//vec2d operator-(const vec2& other) const;
 
-	// Linear multiplication operator
+
+	// Linear multiplication
 	vec2d multiply(double scalar) const;
 
+	// Linear multiplication operator
 	vec2d operator*(double scalar) const;
 
 	// Linear division operator
 	vec2d operator/(double scalar) const;
+
 
 	// Type casting
 	operator const double* () const;
