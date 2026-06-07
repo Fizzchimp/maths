@@ -3,6 +3,7 @@ private:
 	const int rows = 2;
 	const int cols = 2;
 	float m[4];
+	
 public:
 	// Default constructor
 	mat2();
@@ -18,7 +19,6 @@ public:
 	void setValue(int row, int col, float value);
 
 
-	
 	// Matrix multiplication
 	mat2 multiply(const mat2& other) const;
 

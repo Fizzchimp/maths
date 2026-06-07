@@ -52,7 +52,7 @@ mat2::operator const float* () const
 }
 
 
-
+// TODO FIX
 // mat2 operator*(const float& scalar, const mat2& matrix)
 // {
 // 	mat2 result;

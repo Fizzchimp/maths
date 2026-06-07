@@ -1,8 +1,13 @@
 #pragma once
 #include <cmath>
 
+// Forward declaration for conversion methods
+class vec3;
+class vec3d;
 
-// Float vector
+
+
+//// Float vector
 class vec3
 {
 public:
@@ -10,15 +15,20 @@ public:
 	float y;
 	float z;
 
-	// Constructors
+
+
+	//// Constructors
+
+	// Default constructor
 	vec3(float x = 0, float y = 0, float z = 0);
 
-	// Returns the magnitude of the vector
+
+
+	// Calculates the magnitude
 	float magnitude() const;
 
-
-	// Type casting
-	operator const float*() const;
+	// Calculates the unit vector
+	vec3 unitVector() const;
 
 
 
@@ -29,17 +39,27 @@ public:
 	vec3 operator-(const vec3& other) const;
 
 
-	// Linear Multiplication operator
+
+	// Linear multiplication
 	vec3 multiply(float scalar) const;
 
+	// Linear multiplication operator
 	vec3 operator*(float scalar) const;
 	
-	// Linear division
+	// Linear division operator
 	vec3 operator/(float scalar) const;
+
+
+
+	//// Type casting
+
+	// Cast to a float pointer
+	operator const float*() const;
 };
 
 
-// Double vector
+
+//// Double vector
 class vec3d
 {
 public:
@@ -47,23 +67,18 @@ public:
 	double y;
 	double z;
 
-	// Constructors
+
+	
+	//// Constructors
+
+	// Default constructor
 	vec3d(double x = 0, double y = 0, double z = 0);
 
 
-	// Type casting
-	// Convert to a double array
-	operator const double* () const;
-
-	// Convert to a float vector
-	operator const vec3() const;
-
-
-
-	// Returns the magnitude of the vector
+	// Calculates the magnitude
 	double magnitude() const;
 
-	// Returns the unit vector
+	// Calculates the unit vector
 	vec3d unitVector() const;
 
 
@@ -75,11 +90,23 @@ public:
 	vec3d operator-(const vec3d& other) const;
 
 
-	// Linear Multiplication
+
+	// Linear multiplication
 	vec3d multiply(double scalar) const;
 
+	// Linear multiplication operator
 	vec3d operator*(double scalar) const;
 
-	// Linear Division
+	// Linear Division operator
 	vec3d operator/(double scalar) const;
+
+
+
+	//// Type casting
+
+	// Cast to a double pointer
+	operator const double* () const;
+
+	// Cast to a float vector
+	operator const vec3() const;
 };

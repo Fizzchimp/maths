@@ -5,15 +5,22 @@
 class vec2;
 class vec2d;
 
-// Float vector
+
+
+//// Float vector
 class vec2
 {
 public:
 	float x;
 	float y;
 
-	// Constructors
+
+
+	//// Constructors
+
+	// Default constructor
 	vec2(float x = 0, float y = 0);
+
 
 
 	// Calculates the magnitude
@@ -26,11 +33,13 @@ public:
 	vec2 tangentVector() const;
 
 
+
 	// Addition operator
 	vec2 operator+(const vec2& other) const;
 
 	// Subtraction operator
 	vec2 operator-(const vec2& other) const;
+
 
 
 	// Linear multiplication
@@ -44,18 +53,12 @@ public:
 	// Linear division operator
 	vec2 operator/(double scalar) const;
 
-	// Linear division operator
-	// vec2 operator/(vec2 vec) const;
 
 
-	// Type casting
+	//// Type casting
+	
+	// Cast to a float pointer
 	operator const float* () const;
-
-	// Return a vec2d with the same values
-	vec2d convertToDouble() const;
-
-	// TODO: Why isnt this working?
-	// operator const vec2d() const;
 };
 
 
@@ -68,8 +71,13 @@ public:
 	double x;
 	double y;
 
-	// Constructors
+
+
+	//// Constructors
+
+	// Default constructor
 	vec2d(double x = 0, double y = 0);
+
 
 
 	// Calculates the magnitude
@@ -82,15 +90,13 @@ public:
 	vec2d tangentVector() const;
 
 
+
 	// Addition operator
 	vec2d operator+(const vec2d& other) const;
-
-	// vec2d operator+(const vec2& other) const;
 
 	// Subtraction operator
 	vec2d operator-(const vec2d& other) const;
 
-	//vec2d operator-(const vec2& other) const;
 
 
 	// Linear multiplication
@@ -103,17 +109,19 @@ public:
 	vec2d operator/(double scalar) const;
 
 
-	// Type casting
-	operator const double* () const;
 
-	// operator const vec2() const;
+	//// Type casting
+
+	// Cast to a double pointer
+	operator const double* () const;
 };
 
 
 
 
-//// Other functions
+////// Other functions
 
 // Dot product 
 vec2 dotProduct(const vec2& vec_1, const vec2& vec_2);
+
 vec2d dotProduct(const vec2d& vec_1, const vec2d& vec_2);
