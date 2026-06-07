@@ -1,3 +1,6 @@
+#pragma once
+#include "vec2.h"
+
 class mat2{
 private:
 	const int rows = 2;
@@ -30,6 +33,20 @@ public:
 	mat2 operator*(const mat2& other) const;
 
 	
+
+	// Transformation of a float vector
+	vec2 transform(const vec2& vec) const;
+
+	// Transformation of a double vector
+	vec2d transform(const vec2d& vec) const;
+
+	// Float vector transformation operator
+	vec2 operator*(const vec2& vec) const;
+
+	// Double vector transformation operator
+	vec2d operator*(const vec2d& vec) const;
+
+
 
 	//// Type casting
 
