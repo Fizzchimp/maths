@@ -1,6 +1,7 @@
 #pragma once
 #include "mat2.h"
 
+//// Constructors
 
 // Default constructor
 mat2::mat2() :	m{
@@ -19,6 +20,7 @@ mat2::mat2(
 }
 
 
+
 // Returns the value at the specified position
 float mat2::getValue(int row, int col) const
 {
@@ -32,7 +34,9 @@ void mat2::setValue(int row, int col, float value)
 }
 
 
-mat2 mat2::operator*(const mat2& other) const
+
+// Matrix multiplication
+mat2 mat2::matmul(const mat2& other) const
 {
 	mat2 result;
 	for (int i = 0; i < rows; i++)
@@ -45,23 +49,18 @@ mat2 mat2::operator*(const mat2& other) const
 	return result;
 }
 
-// Type casting
+// Matrix multiplication operator
+mat2 mat2::operator*(const mat2& other) const
+{
+	return matmul(other);
+}
+
+
+
+//// Type casting
+
+// Cast to a float pointer
 mat2::operator const float* () const
 {
 	return m;
 }
-
-
-// TODO FIX
-// mat2 operator*(const float& scalar, const mat2& matrix)
-// {
-// 	mat2 result;
-// 	for (int i = 0; i < 2; i++)
-// 	{
-// 		for (int j = 0; j < 2; j++)
-// 		{
-// 			result.setValue(i, j, matrix.getValue(i, j) * scalar);
-// 		}
-// 	}
-// 	return result;
-// }
