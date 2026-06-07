@@ -1,4 +1,3 @@
-#pragma once
 #include "mat2.h"
 
 //// Constructors
