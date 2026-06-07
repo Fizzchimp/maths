@@ -1,59 +1,78 @@
-#pragma once
 
+#include "mat4.h"
 #include <cmath>
-#include "vec2.h"
 
 
-class mat4
-{
-private:
-	int rows = 4;
-	int cols = 4;
-	float m[16];
+//// Constructors
 
-public:
-	// Constructor with 16 values
-	mat4(
-		float x0, float y0, float z0, float w0,
-		float x1, float y1, float z1, float w1,
-		float x2, float y2, float z2, float w2,
-		float x3, float y3, float z3, float w3
-	)
-	{
-		m[0]  = x0, m[1]  = y0, m[2]  = z0, m[3]  = w0,
-		m[4]  = x1, m[5]  = y1, m[6]  = z1, m[7]  = w1,
-		m[8]  = x2, m[9]  = y2, m[10] = z2, m[11] = w2,
-		m[12] = x3, m[13] = y3, m[14] = z3, m[15] = w3;
-	}
-
-	// Default constructor
-	mat4() :
-		m{
+// Default constructor
+mat4::mat4() :
+	m{
 		1.0f, 0.0f, 0.0f, 0.0f,
 		0.0f, 1.0f, 0.0f, 0.0f,
 		0.0f, 0.0f, 1.0f, 0.0f,
 		0.0f, 0.0f, 0.0f, 1.0f
-	} {
+	} {}
+
+// Constructor with 16 values
+mat4::mat4(
+	float x0, float y0, float z0, float w0,
+	float x1, float y1, float z1, float w1,
+	float x2, float y2, float z2, float w2,
+	float x3, float y3, float z3, float w3
+) : 
+	m{
+		x0, y0, z0, w0,
+		x1, y1, z1, w1,
+		x2, y2, z2, w2,
+		x3, y3, z3, w3
 	}
+{
+	// m[0]  = x0, m[1]  = y0, m[2]  = z0, m[3]  = w0,
+	// m[4]  = x1, m[5]  = y1, m[6]  = z1, m[7]  = w1,
+	// m[8]  = x2, m[9]  = y2, m[10] = z2, m[11] = w2,
+	// m[12] = x3, m[13] = y3, m[14] = z3, m[15] = w3;
+}
 
-	// Returns the value of one element in the matrix
-	float getValue(int row, int col) const
+
+
+// Returns the value at the specified position
+float mat4::getValue(int row, int col) const
+{
+	return m[col * rows + row];
+}
+
+// Changes the value of one element in the matrixz
+void mat4::setValue(int row, int col, float value)
+{
+	m[col * rows + row] = value;
+}
+
+
+
+// Linear multiplication
+mat4 mat4::multiply(float scalar) const
+{	
+	mat4 result;
+	for (int i = 0; i < rows * cols; i++)
 	{
-		return m[col * rows + row];
+		result.m[i] *= scalar;
 	}
+	return result;
+}
 
-	// Changes the value of one element in the matrixz
-	void setValue(int row, int col, float value)
-	{
-		m[col * rows + row] = value;
-	}
+// Linear multiplication operator
+mat4 mat4::operator*(float scalar) const
+{
+	return multiply(scalar);
+}
 
 
-	// Method to multiply two matrices
 
-	mat4 operator*(const mat4& other) const
-	{
-		mat4 result;
+// Matrix multiplication
+mat4 mat4::matmul(const mat4& other) const
+{
+	mat4 result;
 		for (int i = 0; i < rows; i++)
 		{
 			for (int j = 0; j < cols; j++)
@@ -64,76 +83,69 @@ public:
 				m[i * cols + 3] * other.m[3 * cols + j];
 		}
 		return result;
-	}
+}
 
-	// Methods to apply transformation to a vec2
-	// Float Vector
-	vec2 operator*(const vec2& vec) const
-	{
-		float x = m[0] * vec.x + m[1] * vec.y;
-		float y = m[4] * vec.x + m[5] * vec.y;
-		return vec2(x, y);
-	}
-
-	// Double Vector
-	vec2d operator*(const vec2d& vec) const
-	{
-		double x = m[0] * vec.x + m[1] * vec.y;
-		double y = m[4] * vec.x + m[5] * vec.y;
-		return vec2d(x, y);
-	}
+// Matrix multiplication operator
+mat4 mat4::operator*(const mat4& other) const
+{
+	return matmul(other);
+}
 
 
-	// Type casting
-	operator const float* () const
-	{
-		return m;
-	}
 
-	// Multiplication operator
-	mat4 operator*(float scalar) const {
-		mat4 result;
-		for (int i = 0; i < rows * cols; i++) 
-		{
-			result.m[i] = m[i] * scalar;
-		}
-		return result;
-	}
+// Convert to a two by two matrix
+mat2 mat4::xy() const
+{
+	return mat2(
+		m[0], m[1],
+		m[4], m[5]
+	);
+}
 
-	// Rotation matricx generation
-	static mat4 rotationMatX(float angle)
-	{
-		float c = cos(angle);
-		float s = sin(angle);
-		return mat4(
-			1.0f, 0.0f, 0.0f, 0.0f,
-			0.0f, c, -s, 0.0f,
-			0.0f, s, c, 0.0f,
-			0.0f, 0.0f, 0.0f, 1.0f
-		);
-	}
 
-	static mat4 rotationMatY(float angle)
-	{
-		float c = cos(angle);
-		float s = sin(angle);
-		return mat4(
-			c, 0.0f, s, 0.0f,
-			0.0f, 1.0f, 0.0f, 0.0f,
-			-s, 0.0f, c, 0.0f,
-			0.0f, 0.0f, 0.0f, 1.0f
-		);
-	}
 
-	static mat4 rotationMatZ(float angle)
-	{
-		float c = cos(angle);
-		float s = sin(angle);
-		return mat4(
-			c, -s, 0.0f, 0.0f,
-			s, c, 0.0f, 0.0f,
-			0.0f, 0.0f, 1.0f, 0.0f,
-			0.0f, 0.0f, 0.0f, 1.0f
-		);
-	}
-};
+//// Type casting
+
+// Cast to a float pointer
+mat4::operator const float* () const
+{
+	return m;
+}
+
+
+// Generate a rotation matrix (around the x axis)
+mat4 mat4::rotationMatX(float angle)
+{
+	float c = cos(angle);
+	float s = sin(angle);
+	return mat4(
+		1.0f, 0.0f, 0.0f, 0.0f,
+		0.0f, c,   -s,    0.0f,
+		0.0f, s,    c,    0.0f,
+		0.0f, 0.0f, 0.0f, 1.0f
+	);
+}
+
+mat4 mat4::rotationMatY(float angle)
+{
+	float c = cos(angle);
+	float s = sin(angle);
+	return mat4(
+		c,    0.0f, s,    0.0f,
+		0.0f, 1.0f, 0.0f, 0.0f,
+	   -s,    0.0f, c,    0.0f,
+		0.0f, 0.0f, 0.0f, 1.0f
+	);
+}
+
+mat4 mat4::rotationMatZ(float angle)
+{
+	float c = cos(angle);
+	float s = sin(angle);
+	return mat4(
+		c,   -s,    0.0f, 0.0f,
+		s,    c,    0.0f, 0.0f,
+		0.0f, 0.0f, 1.0f, 0.0f,
+		0.0f, 0.0f, 0.0f, 1.0f
+	);
+}

@@ -56,6 +56,38 @@ mat2 mat2::operator*(const mat2& other) const
 
 
 
+// Transformation of a float vector
+vec2 mat2::transform(const vec2& vec) const
+{
+	return vec2(
+		m[0] * vec.x + m[1] * vec.y,
+		m[2] * vec.x + m[3] * vec.y
+	);
+}
+
+// Transformation of a double vector
+vec2d mat2::transform(const vec2d& vec) const
+{
+	return vec2d(
+		m[0] * vec.x + m[1] * vec.y,
+		m[2] * vec.x + m[3] * vec.y
+	);
+}
+
+// Float vector transformation operator
+vec2 mat2::operator*(const vec2& vec) const
+{
+	return transform(vec);
+}
+
+// Double vector transformation operator
+vec2d mat2::operator*(const vec2d& vec) const
+{
+	return transform(vec);
+}
+
+
+
 //// Type casting
 
 // Cast to a float pointer
