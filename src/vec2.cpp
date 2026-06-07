@@ -1,10 +1,15 @@
 #include "vec2.h"
 
-// Constructors
+///// Float vector implementation
+
+//// Constructors
+
+// Default constructor
 vec2::vec2(float x, float y) : x(x), y(y) {}
 
 
-// Calculates the agnitude
+
+// Calculates the magnitude
 float vec2::magnitude() const
 {
 	return sqrt(x * x + y * y);
@@ -23,6 +28,7 @@ vec2 vec2::tangentVector() const
 }
 
 
+
 // Addition operator
 vec2 vec2::operator+(const vec2& other) const
 {
@@ -34,6 +40,7 @@ vec2 vec2::operator-(const vec2& other) const
 {
 	return vec2(x - other.x, y - other.y);
 }
+
 
 
 // Linear multiplication
@@ -54,39 +61,26 @@ vec2 vec2::operator/(double scalar) const
 	return multiply(1.0f / scalar);
 }
 
-// Linear division by another vector
-// vec2 vec2::operator/(vec2 vec) const
-// {
-// 	return vec2(x / vec.x, y / vec.y);
-// }
 
 
-// Return a vec2d with the same values
-vec2d vec2::convertToDouble() const
-{
-	return vec2d((double)x, (double)y);
-}
+//// Type casting
 
-// Type casting
+// Cast to float pointer
 vec2::operator const float* () const
 {
 	return &x;
 }
 
-// TODO: Why isnt this working?
-// vec2::operator const vec2d() const
-// {
-// 	return convertToDouble();
-// }
 
 
 
+////// Double vector Implementation
 
+//// Constructors
 
-
-//// Double vector Implementation
-// Constructors
+// Default constructor
 vec2d::vec2d(double x, double y) : x(x), y(y) {}
+
 
 
 // Calculates the magnitude
@@ -108,22 +102,21 @@ vec2d vec2d::tangentVector() const
 }
 
 
+
 // Addition operator
 vec2d vec2d::operator+(const vec2d& other) const
 {
 	return vec2d(x + other.x, y + other.y);
 }
 
-// vec2d vec2d::operator+(const vec2& other) const
-// {
-// 	return vec2d(x + (double)other.x, y + (double)other.y);
-// }
+
 
 // Subtraction operator
 vec2d vec2d::operator-(const vec2d& other) const
 {
 	return vec2d(x - other.x, y - other.y);
 }
+
 
 
 // Linear multiplication
@@ -144,21 +137,21 @@ vec2d vec2d::operator/(double scalar) const
 	return multiply(1.0 / scalar);
 }
 
-// Type casting
+
+
+
+//// Type casting
+
+// Cast to double pointer
 vec2d::operator const double* () const
 {
 	return &x;
 }
 
-// vec2d::operator const vec2() const
-// {
-// 	return vec2((float)x, (float)y);
-// }
 
 
 
-
-//// Other functions
+////// Other functions
 
 // Dot product
 vec2 dotProduct(const vec2& vec_1, const vec2& vec_2)
