@@ -4,8 +4,8 @@
 class mat4
 {
 private:
-    int rows = 4;
-    int cols = 4;
+    const int rows = 4;
+    const int cols = 4;
     float m[16];
 
 public:

@@ -1,4 +1,3 @@
-
 #include "mat4.h"
 #include <cmath>
 

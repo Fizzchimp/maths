@@ -1,7 +1,8 @@
 #pragma once
 #include "vec2.h"
 
-class mat2{
+class mat2
+{
 private:
 	const int rows = 2;
 	const int cols = 2;
@@ -14,7 +15,10 @@ public:
 	mat2();
 	
 	// Constructor with 4 values
-	mat2(float x0, float y0, float x1, float y1);
+	mat2(
+		float x0, float y0, 
+		float x1, float y1
+	);
 	
 
 
