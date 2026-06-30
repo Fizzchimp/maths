@@ -25,13 +25,7 @@ mat4::mat4(
 		x1, y1, z1, w1,
 		x2, y2, z2, w2,
 		x3, y3, z3, w3
-	}
-{
-	// m[0]  = x0, m[1]  = y0, m[2]  = z0, m[3]  = w0,
-	// m[4]  = x1, m[5]  = y1, m[6]  = z1, m[7]  = w1,
-	// m[8]  = x2, m[9]  = y2, m[10] = z2, m[11] = w2,
-	// m[12] = x3, m[13] = y3, m[14] = z3, m[15] = w3;
-}
+	} {}
 
 
 
@@ -41,7 +35,7 @@ float mat4::getValue(int row, int col) const
 	return m[col * rows + row];
 }
 
-// Changes the value of one element in the matrixz
+// Changes the value at the specified position
 void mat4::setValue(int row, int col, float value)
 {
 	m[col * rows + row] = value;
@@ -55,7 +49,7 @@ mat4 mat4::multiply(float scalar) const
 	mat4 result;
 	for (int i = 0; i < rows * cols; i++)
 	{
-		result.m[i] *= scalar;
+		result.m[i] = m[i] * scalar;
 	}
 	return result;
 }
@@ -72,16 +66,18 @@ mat4 mat4::operator*(float scalar) const
 mat4 mat4::matmul(const mat4& other) const
 {
 	mat4 result;
-		for (int i = 0; i < rows; i++)
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
 		{
-			for (int j = 0; j < cols; j++)
-				result.m[i * cols + j] =
-				m[i * cols + 0] * other.m[0 * cols + j] +
-				m[i * cols + 1] * other.m[1 * cols + j] +
-				m[i * cols + 2] * other.m[2 * cols + j] +
-				m[i * cols + 3] * other.m[3 * cols + j];
+			result.m[i * cols + j] =
+			m[i * cols + 0] * other.m[0 * cols + j] +
+			m[i * cols + 1] * other.m[1 * cols + j] +
+			m[i * cols + 2] * other.m[2 * cols + j] +
+			m[i * cols + 3] * other.m[3 * cols + j];
 		}
-		return result;
+	}
+	return result;
 }
 
 // Matrix multiplication operator
@@ -106,7 +102,7 @@ mat2 mat4::xy() const
 //// Type casting
 
 // Cast to a float pointer
-mat4::operator const float* () const
+mat4::operator const float*() const
 {
 	return m;
 }
