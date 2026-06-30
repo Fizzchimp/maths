@@ -41,9 +41,11 @@ mat2 mat2::matmul(const mat2& other) const
 	for (int i = 0; i < rows; i++)
 	{
 		for (int j = 0; j < cols; j++)
+		{
 			result.m[i * cols + j] =
 			m[i * cols + 0] * other.m[0 * cols + j] +
 			m[i * cols + 1] * other.m[1 * cols + j];
+		}
 	}
 	return result;
 }

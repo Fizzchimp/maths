@@ -56,7 +56,7 @@ public:
     //// Type casting
     
     // Cast to a float pointer
-    operator const float* () const;
+    operator const float*() const;
 
 
     
