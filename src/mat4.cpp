@@ -32,13 +32,13 @@ mat4::mat4(
 // Returns the value at the specified position
 float mat4::getValue(int row, int col) const
 {
-	return m[col * rows + row];
+	return m[row * cols + col];
 }
 
 // Changes the value at the specified position
 void mat4::setValue(int row, int col, float value)
 {
-	m[col * rows + row] = value;
+	m[row * cols + col] = value;
 }
 
 

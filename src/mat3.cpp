@@ -27,13 +27,13 @@ mat3::mat3(
 // Returns the value at the specified position
 float mat3::getValue(int row, int col) const
 {
-    return m[col * rows + row];
+    return m[row * cols + col];
 }
 
 // Changes the value at the specicfied position
 void mat3::setValue(int row, int col, float value)
 {
-    m[col * rows + row] = value;
+    m[row * cols + col] = value;
 }
 
 
