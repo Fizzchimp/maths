@@ -38,6 +38,36 @@ void mat3::setValue(int row, int col, float value)
 
 
 
+// Returns the determinant of the matrix
+float mat3::determinant() const
+{
+    return m[0] * (m[4] * m[8] - m[7] * m[5]) -
+           m[1] * (m[3] * m[8] - m[5] * m[6]) +
+           m[2] * (m[3] * m[7] - m[4] * m[6]);
+}
+ 
+
+// Returns the inverse matrix
+mat3 mat3::inverse() const
+{
+    mat3 inv;
+
+    inv.m[0] =  (m[4] * m[8] - m[7] * m[5]);
+    inv.m[1] = -(m[3] * m[8] - m[6] * m[5]);
+    inv.m[2] =  (m[3] * m[7] - m[6] * m[4]);
+    inv.m[3] = -(m[1] * m[8] - m[7] * m[2]);
+    inv.m[4] =  (m[0] * m[8] - m[6] * m[2]);
+    inv.m[5] = -(m[0] * m[7] - m[6] * m[1]);
+    inv.m[6] =  (m[1] * m[5] - m[4] * m[2]);
+    inv.m[7] = -(m[0] * m[5] - m[3] * m[2]);
+    inv.m[8] =  (m[0] * m[4] - m[3] * m[1]);
+
+    
+    return inv * (1.0f / determinant());
+}
+
+
+
 // Linear multiplication
 mat3 mat3::multiply(float scalar) const
 {

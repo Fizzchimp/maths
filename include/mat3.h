@@ -31,6 +31,14 @@ public:
     void setValue(int row, int col, float value);
 
 
+    // Returns the determinant of the matrix
+    float determinant() const;
+
+    
+    // Returns the inverse matrix
+    mat3 inverse() const;
+
+
 
     // Linear multiplication
     mat3 multiply(float scalar) const;
