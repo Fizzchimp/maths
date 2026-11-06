@@ -136,5 +136,5 @@ vec3d::operator const double*() const
 // Cast to a float vector
 vec3d::operator const vec3() const
 {
-	return vec3((float)x, (float)y, (float)x);
+	return vec3((float)x, (float)y, (float)z);
 }
