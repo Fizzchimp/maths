@@ -55,6 +55,11 @@ public:
 
 
 
+	// Dot product
+	float dot(vec2& other) const;
+
+
+
 	//// Type casting
 	
 	// Cast to a float pointer
@@ -107,6 +112,11 @@ public:
 
 	// Linear division operator
 	vec2d operator/(double scalar) const;
+
+
+
+	// Dot product
+	double dot(vec2d& other) const;
 
 
 

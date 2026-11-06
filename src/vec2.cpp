@@ -63,6 +63,13 @@ vec2 vec2::operator/(double scalar) const
 
 
 
+// Dot product
+float vec2::dot(vec2& other) const
+{
+	return x * other.x + y * other.y;
+}
+
+
 //// Type casting
 
 // Cast to float pointer
@@ -137,6 +144,13 @@ vec2d vec2d::operator/(double scalar) const
 	return multiply(1.0 / scalar);
 }
 
+
+
+// Dot product
+double vec2d::dot(vec2d& other) const
+{
+	return x * other.x + y * other.y;
+}
 
 
 
